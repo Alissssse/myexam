@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Экзамены</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .exam-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        .exam-image {
+            max-width: 300px;
+            height: auto;
+            margin: 10px 0;
+        }
+        .exam-info {
+            margin: 10px 0;
+        }
+        .exam-users {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Култашева Алиса - Группа 231-365</h1>
+    </div>
+
+    <div class="exams-list">
+        {% for exam in exams %}
+            <div class="exam-card">
+                <h2>{{ exam.title }}</h2>
+                <div class="exam-info">
+                    <p><strong>Дата создания:</strong> {{ exam.created_at|date:"d.m.Y H:i" }}</p>
+                    <p><strong>Дата проведения:</strong> {{ exam.exam_date|date:"d.m.Y H:i" }}</p>
+                    {% if exam.image %}
+                        <img src="{{ exam.image.url }}" alt="Изображение задания" class="exam-image">
+                    {% endif %}
+                    <div class="exam-users">
+                        <p><strong>Участники экзамена:</strong></p>
+                        <ul>
+                            {% for user in exam.users.all %}
+                                <li>{{ user.username }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html> 

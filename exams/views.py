@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from .models import akxam
 
-# Create your views here.
+def akxam_view(request):
+    exams = akxam.objects.filter(is_public=True)
+    return render(request, 'exams/akxam.html', {'exams': exams})
